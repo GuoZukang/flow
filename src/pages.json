@@ -1,16 +1,96 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	}
+  // 组件⾃动导⼊
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      // uni-ui 规则如下配置
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    }
+  },
+  "pages": [
+    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/login/login",
+      "style": {
+        "navigationBarTitleText": "神领快递",
+        "navigationBarBackgroundColor": "#fff"
+      }
+    },
+    {
+      "path": "pages/task/task",
+      "style": {
+        "navigationBarTitleText": "任务",
+        "navigationBarBackgroundColor": "#fff"
+      }
+    },
+    {
+      "path": "pages/message/message",
+      "style": {
+        "navigationBarTitleText": "消息",
+        "navigationBarBackgroundColor": "#fff"
+      }
+    },
+    {
+      "path": "pages/my/my",
+      "style": {
+        "navigationBarTitleText": "我的",
+        "app-plus": {
+          "titleNView": false
+        }
+      }
+    },
+    {
+      "path": "pages/truck/truck",
+      "style": {
+        "navigationBarTitleText": "车辆信息",
+        "navigationBarBackgroundColor": "#fff"
+      }
+    },
+    {
+      "path": "pages/tasks/tasks",
+      "style": {
+        "navigationBarTitleText": "任务数据",
+        "navigationBarBackgroundColor": "#fff"
+      }
+    },
+    {
+      "path": "pages/set/set",
+      "style": {
+        "navigationBarTitleText": "系统设置",
+        "navigationBarBackgroundColor": "#fff"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "color": "#818181",
+    "selectedColor": "#EF4F3F",
+    "list": [
+      {
+        "text": "任务",
+        "pagePath": "pages/task/task",
+        "iconPath": "static/tabbar/task_normal.png",
+        "selectedIconPath": "static/tabbar/task_selected.png"
+      },
+      {
+        "text": "消息",
+        "pagePath": "pages/message/message",
+        "iconPath": "static/tabbar/message_normal.png",
+        "selectedIconPath": "static/tabbar/message_selected.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/my/my",
+        "iconPath": "static/tabbar/my_normal.png",
+        "selectedIconPath": "static/tabbar/my_selected.png"
+      }
+    ]
+  }
 }
