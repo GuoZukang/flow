@@ -35,8 +35,6 @@ import { ref } from 'vue'
 const info = ref<any>({})
 const imgArr = ref<any>([])
 truck().then((res: any) => {
-  console.log(res)
-
   info.value = res.data
   imgArr.value = res.data.pictureList
 })

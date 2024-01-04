@@ -84,6 +84,7 @@
 import { login } from '@/api/login'
 import { ref } from 'vue'
 import { useUserStore } from '../../stores/user'
+import { showSuccessToast, showFailToast } from 'vant'
 const store = useUserStore()
 const flag = ref(true)
 const form = ref({
@@ -91,7 +92,7 @@ const form = ref({
   key: '',
 })
 const form1 = ref({
-  account: 'xbsj001',
+  account: 'yang123',
   password: '123456',
 })
 
@@ -102,16 +103,10 @@ const onSubmit1 = () => {
       uni.switchTab({
         url: '/pages/task/task',
       })
-      uni.showToast({
-        title: '登录成功',
-        icon: 'success',
-      })
+      showSuccessToast('登录成功')
       store.token = res.data
     } else {
-      uni.showToast({
-        title: res.msg,
-        icon: 'error',
-      })
+      showFailToast(res.msg)
     }
   })
 }

@@ -28,7 +28,7 @@
         <view>车辆信息</view>
         <view><van-icon name="arrow" size="18" /></view>
       </view>
-      <view class="ulist task" @click="gotasks">
+      <view class="ulist" @click="gotasks">
         <view>任务数据</view>
         <view><van-icon name="arrow" size="18" /></view>
       </view>
@@ -110,7 +110,7 @@ const goset = () => {
 }
 .list {
   width: 95%;
-  height: 360rpx;
+  height: 280rpx;
   background-color: #fff;
   border-radius: 10px;
   margin: auto;
@@ -121,9 +121,7 @@ const goset = () => {
     justify-content: space-between;
     font-size: 15px;
     font-weight: 550;
-  }
-  .task {
-    margin: 70rpx 0;
+    margin-bottom: 50rpx;
   }
 }
 </style>

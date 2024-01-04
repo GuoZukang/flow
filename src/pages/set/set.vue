@@ -11,14 +11,26 @@
 </template>
 <script lang="ts" setup>
 import { uni } from '@dcloudio/uni-h5'
+import { showConfirmDialog } from 'vant'
 import { ref } from 'vue'
 const arr = ref<any>(['换绑手机', '修改密码', '消息通知设置', '修改密码', '清理缓存'])
 
 const quit = () => {
-  localStorage.removeItem('user')
-  uni.navigateTo({
-    url: '/',
+  showConfirmDialog({
+    title: '',
+    message: '确定要退出登录？',
+    confirmButtonColor: '#EF4F3F',
+    confirmButtonText: '退出',
   })
+    .then(() => {
+      localStorage.removeItem('user')
+      uni.navigateTo({
+        url: '/',
+      })
+    })
+    .catch(() => {
+      // on cancel
+    })
 }
 </script>
 <style>
