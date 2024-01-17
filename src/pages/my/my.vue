@@ -10,11 +10,11 @@
       <view style="margin: 26rpx 0; color: #818181">- 本月任务 -</view>
       <view style="display: flex; justify-content: space-around">
         <view>
-          <view class="num">{{ task.completedAmounts }}</view>
+          <view class="num">{{ task.taskAmounts }}</view>
           <view>任务总量</view>
         </view>
         <view>
-          <view class="num">{{ task.taskAmounts }}</view>
+          <view class="num">{{ task.completedAmounts }}</view>
           <view>完成任务量</view>
         </view>
         <view>
@@ -48,7 +48,9 @@ const task = ref<any>({})
 users().then((res: any) => {
   Iusers.value = res.data
 })
-taskReport({ month: '07', year: '2022' }).then((res: any) => {
+taskReport({ month: '01', year: '2024' }).then((res: any) => {
+  console.log(res)
+
   task.value = res.data
 })
 

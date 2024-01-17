@@ -7,3 +7,12 @@ export const msgApi = (msg: msgType) => {
     data: msg,
   })
 }
+/**
+ * 全部已读接口
+ */
+export const readAll = (contentType: number) => {
+  return http({
+    url: `/driver/messages/readAll/${contentType}`,
+    method: 'PUT',
+  })
+}

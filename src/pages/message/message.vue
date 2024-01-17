@@ -1,106 +1,51 @@
 <template>
-  <van-tabs v-model:active="active" color="#E52D21">
-    <van-tab title="公告"> </van-tab>
-    <van-tab title="任务通知"></van-tab>
+  <van-tabs v-model:active="tabIndex" color="#E52D21">
+    <van-tab v-for="(item, index) in tabMetas" :key="index" :title="item.title"></van-tab>
   </van-tabs>
-  <scroll-view
-    class="scroll-view"
-    scroll-y
-    @refresherrefresh="onScrollViewRefresh"
-    @scrolltolower="onScrollToLower"
-    :refresher-triggered="isTriggered"
-    refresher-enabled
-    refresher-background="#f5f5f5"
-  >
-    <view class="message">
-      <view class="read">
-        <img src="../../static/icon_yidu.png" alt="" style="width: 32rpx; height: 32rpx" />
-        <view>全部已读</view>
-      </view>
-      <view class="list">
-        <view class="ulist" v-for="(item, index) in msgArr" :key="index">
-          <view class="txt">{{ item.title }}</view>
-          <view>{{ item.created }}</view>
-        </view>
-      </view>
+  <view class="page-container">
+    <view class="message-list" v-show="tabIndex === 0">
+      <announcement></announcement>
     </view>
-  </scroll-view>
+    <view class="message-list" v-show="tabIndex === 1">
+      <notice></notice>
+    </view>
+  </view>
 </template>
+
 <script lang="ts" setup>
-import { onLoad } from '@dcloudio/uni-app'
-import { msgApi } from '@/api/message'
-import { ref } from 'vue'
-import { useMessageList } from '@/hooks/useMessage'
-const { page, isTriggered, hasMore, messageList, getMessageList } = useMessageList(200)
-const active = ref(0)
-const query = ref({
-  contentType: 200,
-  page: 1,
-  pageSize: 10,
-})
-const msgArr = ref<any>([])
+import { reactive, ref } from 'vue'
+import announcement from './components/announcement.vue'
+import notice from './components/notice.vue'
 
-msgApi(query.value).then((res: any) => {
-  msgArr.value = res.data.items
-})
-// 下拉刷新
-const onScrollViewRefresh = async () => {
-  // 将下拉刷新的状态重置为true
-  isTriggered.value = true
-
-  // 将页码重置为第一页
-  page.value = 1
-
-  // 重新请求数据
-  await getMessageList()
-
-  // 将下拉刷新的状态重置为false
-  isTriggered.value = false
+type tabMetasType = {
+  title: string
+  rendered: boolean
 }
 
-// 上拉加载
-const onScrollToLower = () => {
-  // 如果没有数据,则不进行请求数据
-  console.log('hasMore', hasMore.value)
-  if (!hasMore.value) return
-  // 继续请求数据
-  getMessageList()
-}
-
-// 初始化加载
-onLoad(() => {
-  getMessageList()
-})
+// Tab 标签页索引
+const tabIndex = ref<number>(0)
+const tabMetas = reactive<tabMetasType[]>([
+  {
+    title: '公告',
+    rendered: true,
+  },
+  {
+    title: '任务通知',
+    rendered: false,
+  },
+])
 </script>
-<style>
-.message {
-  width: 100vw;
-  height: calc(100vh - 188rpx);
-  background-color: #f5f5f5;
-}
-.read {
-  width: 160rpx;
+
+<style scoped lang="scss">
+.page-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 48rpx 34rpx;
+  flex-direction: column;
+  /* #ifdef H5 */
+  height: calc(100vh - 94rpx);
+  /* #endif */
 }
-.list {
-  width: 100%;
-  height: 364rpx;
-  background-color: #fff;
-  overflow: hidden;
-  .ulist {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 40rpx;
-    margin: 25rpx 0;
-    .txt {
-      width: 55%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
+
+.message-list {
+  flex: 1;
 }
 </style>

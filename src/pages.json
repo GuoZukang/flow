@@ -20,7 +20,10 @@
       "path": "pages/task/task",
       "style": {
         "navigationBarTitleText": "任务",
-        "navigationBarBackgroundColor": "#fff"
+        "navigationBarBackgroundColor": "#fff",
+        "app-plus": {
+          "titleNView": false
+        }
       }
     },
     {
@@ -58,6 +61,24 @@
       "style": {
         "navigationBarTitleText": "系统设置",
         "navigationBarBackgroundColor": "#fff"
+      }
+    },
+    {
+      "path": "pages/detail/detail",
+      "style": {
+        "navigationBarTitleText": "任务详情",
+        "navigationBarBackgroundColor": "#fff",
+        "app-plus": {
+          "titleNView": {
+            "buttons": [
+              {
+                "color": "#000",
+                "fontSize": "30rpx",
+                "text": "取消任务"
+              }
+            ]
+          }
+        }
       }
     }
   ],
